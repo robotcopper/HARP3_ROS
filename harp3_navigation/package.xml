@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>harp3_navigation</name>
+  <version>0.0.0</version>
+  <description>Pose estimation, Nav2 configuration and custom Nav2 plugins for the HARP3 robot.</description>
+
+  <maintainer email="95591405+robotcopper@users.noreply.github.com">robotcopper</maintainer>
+  <license>BSD-3-Clause</license>
+  <url type="repository">https://github.com/robotcopper/harp3</url>
+  <url type="bugtracker">https://github.com/robotcopper/harp3/issues</url>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>geometry_msgs</depend>
+  <depend>harp3_msgs</depend>
+  <depend>nav2_costmap_2d</depend>
+  <depend>nav2_msgs</depend>
+  <depend>nav2_util</depend>
+  <depend>nav_msgs</depend>
+  <depend>pluginlib</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>tf2_ros</depend>
+
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>robot_localization</exec_depend>
+
+  <!-- The Nav2 servers, nav2_amcl, nav2_map_server and slam_toolbox have no
+       binary release for Lyrical and are therefore not declared here. They are
+       imported from source; see dependencies.repos and
+       docs/adr/0002-nav2-source-dependency.md. -->
+
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_cmake_lint_cmake</test_depend>
+  <test_depend>ament_cmake_xmllint</test_depend>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>launch_testing_ament_cmake</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

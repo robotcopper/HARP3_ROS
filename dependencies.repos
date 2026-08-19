@@ -1,0 +1,29 @@
+### Third-party sources that must be built from source alongside this repository.
+###
+### Anything available as a binary from packages.ros.org belongs in the relevant
+### package.xml instead, so that `rosdep` can resolve it. Only list here what has
+### no release for the targeted ROS 2 distribution, or forks pinned to a commit.
+###
+### Import with:  vcs import ../src < dependencies.repos
+
+repositories: {}
+
+### Nav2 is only partially released for Lyrical: the servers, nav2_amcl,
+### nav2_map_server, the behaviour tree navigator and nav2_bringup have no
+### binaries yet. harp3_navigation cannot run without this entry.
+### See docs/adr/0002-nav2-source-dependency.md.
+#
+# repositories:
+#   navigation2:
+#     type: git
+#     url: https://github.com/ros-navigation/navigation2.git
+#     version: lyrical
+
+### slam_toolbox has no Lyrical release either, but building the map is a
+### once-a-season task: uncomment this only when remaking maps/, so that nobody
+### else pays for the source build. See docs/adr/0005-navigation-owns-pose-estimation.md.
+#
+#   slam_toolbox:
+#     type: git
+#     url: https://github.com/SteveMacenski/slam_toolbox.git
+#     version: ros2

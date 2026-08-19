@@ -1,0 +1,22 @@
+# colcon workspace artifacts
+build/
+install/
+log/
+
+# CMake / clangd
+compile_commands.json
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store

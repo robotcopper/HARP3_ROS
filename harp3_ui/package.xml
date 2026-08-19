@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>harp3_ui</name>
+  <version>0.0.0</version>
+  <description>On-robot touchscreen interface for the HARP3 robot.</description>
+
+  <maintainer email="95591405+robotcopper@users.noreply.github.com">robotcopper</maintainer>
+  <license>BSD-3-Clause</license>
+  <url type="repository">https://github.com/robotcopper/harp3</url>
+  <url type="bugtracker">https://github.com/robotcopper/harp3/issues</url>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>diagnostic_msgs</depend>
+  <depend>generate_parameter_library</depend>
+  <depend>harp3_msgs</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_action</depend>
+  <depend>rclcpp_components</depend>
+  <depend>std_srvs</depend>
+
+  <exec_depend>diagnostic_aggregator</exec_depend>
+  <exec_depend>foxglove_bridge</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_cmake_lint_cmake</test_depend>
+  <test_depend>ament_cmake_xmllint</test_depend>
+  <test_depend>ament_lint_auto</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

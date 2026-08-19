@@ -1,0 +1,17 @@
+build:
+  symlink-install: true
+  cmake-args:
+    # --no-warn-unused-cli keeps the build clean for packages that install assets
+    # only, where CMake never reads CMAKE_EXPORT_COMPILE_COMMANDS.
+    - --no-warn-unused-cli
+    - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    - -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+  event-handlers:
+    - console_cohesion+
+
+test:
+  event-handlers:
+    - console_direct+
+
+test-result:
+  all: true
