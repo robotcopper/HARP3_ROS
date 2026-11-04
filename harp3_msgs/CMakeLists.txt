@@ -3,9 +3,12 @@ project(harp3_msgs)
 
 find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
 
-# rosidl_generate_interfaces() rejects an empty file list, so the call is added
-# together with the first definition placed in msg/, srv/ or action/.
+rosidl_generate_interfaces(${PROJECT_NAME}
+  msg/LimitSwitches.msg
+  DEPENDENCIES std_msgs
+)
 
 ament_export_dependencies(rosidl_default_runtime)
 
