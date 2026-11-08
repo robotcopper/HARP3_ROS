@@ -2,8 +2,11 @@
 
 Date: 2026-11-03
 
-Status: accepted. Supersedes in part [ADR 0007](0007-zenoh-middleware-and-mcu-link.md):
-the rule that no microcontroller runs ROS, for the mobile base board only.
+Status: accepted, superseded in part by [ADR 0011](0011-micro-ros-on-the-motor-board.md):
+the board runs micro-ROS over `rmw_zenoh_pico` rather than Pico-ROS; the link, the
+entities, the motor cut-off and the restart stand. Supersedes in part
+[ADR 0007](0007-zenoh-middleware-and-mcu-link.md): the rule that no
+microcontroller runs ROS, for the mobile base board only.
 
 ## Context
 

@@ -13,6 +13,12 @@ released for Lyrical (`apt-cache show ros-lyrical-<name>`). Nav2 is only partial
 released; see `docs/adr/0002-nav2-source-dependency.md`. Anything unavailable as a
 binary belongs in `dependencies.repos`, not in a `package.xml`.
 
+The middleware is Zenoh, `rmw_zenoh_cpp`. Do not add the micro-ROS agent: it is
+Fast-DDS-only and does not interoperate with Zenoh; see
+`docs/adr/0007-zenoh-middleware-and-mcu-link.md`. A microcontroller that runs ROS
+uses micro-ROS over `rmw_zenoh_pico`, which needs no agent; the mobile base board
+is the first, see `docs/adr/0011-micro-ros-on-the-motor-board.md`.
+
 ## Repository structure
 
 Packages live at the root. This repository is the content of a colcon `src`

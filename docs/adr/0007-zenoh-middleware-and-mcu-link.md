@@ -3,8 +3,10 @@
 Date: 2026-08-23
 
 Status: accepted, superseded in part by
-[ADR 0010](0010-pico-ros-on-the-motor-board.md): the mobile base board runs
-Pico-ROS, and the firmware lives in its own repository.
+[ADR 0010](0010-pico-ros-on-the-motor-board.md): the mobile base board runs ROS,
+and the firmware lives in its own repository; and by
+[ADR 0011](0011-micro-ros-on-the-motor-board.md): that board runs micro-ROS over
+`rmw_zenoh_pico`, forks of which meet the conditions below.
 
 ## Context
 

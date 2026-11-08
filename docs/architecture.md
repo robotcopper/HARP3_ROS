@@ -235,6 +235,18 @@ Three composable containers, not one and not twelve.
 A crash in the behaviour tree must not take down the control loop. That is the
 whole trade-off between intra-process performance and fault isolation.
 
+The microcontrollers are not in this table. The mobile base board runs ROS over
+Zenoh and attaches to the router like any other node: it subscribes to the wheel
+commands that `joint_state_topic_hardware_interface` publishes, and publishes its
+odometry sensor and limit switches. Its firmware therefore depends on the Zenoh
+version the host runs. It runs Pico-ROS on `zenoh-pico`, see
+[ADR 0010](adr/0010-pico-ros-on-the-motor-board.md), until it is ported to
+micro-ROS over `rmw_zenoh_pico`, see
+[ADR 0011](adr/0011-micro-ros-on-the-motor-board.md).
+Every other board runs no ROS and is reached over a serial protocol, which keeps
+its firmware independent of the middleware; see
+[ADR 0007](adr/0007-zenoh-middleware-and-mcu-link.md).
+
 ## No shared utility package
 
 There is deliberately no `harp3_common` or `harp3_utils`. Such a package starts as a
