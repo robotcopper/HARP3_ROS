@@ -50,8 +50,8 @@ gives the method and the raw results. At 200 MHz, with a 99 Hz command stream:
 | Command arrival spread within one second | 0.61 ms | 1.04 ms |
 | Service round trip, median / maximum | 2.88 / 4.30 ms | 2.90 / 7.76 ms |
 | Late joiner on a transient local topic | 3.3 to 5.3 ms | 3.2 to 3.6 ms |
-| Flash | 260 KB | 369 KB |
-| RAM left | about 120 KB | about 37 KB |
+| Flash | 255.9 KB | 365.5 KB |
+| RAM left to allocate from, at the lowest | about 119 KB | about 36 KB |
 
 At the RP2040's default 125 MHz, Pico-ROS is ahead by 1.5 points of idle time and
 0.3 to 0.4 ms. The tails differ for a structural reason: Pico-ROS runs callbacks in
@@ -87,8 +87,9 @@ does not use `rcl` timers. Periodic work is a FreeRTOS task that triggers a guar
 condition. A long callback delays every command behind it; the 200 ms cut-off
 bounds the consequence, not the delay.
 
-Memory is tighter: 110 KB more flash, and about 37 KB of RAM left against 120 KB,
-19 KB of which go to code that runs from RAM to save CPU. In the comparison's
+Memory is tighter: 110 KB more flash, and about 36 KB of RAM left to allocate
+from against 119 KB; 19 KB of the difference is code run from RAM to save CPU.
+In the comparison's
 firmware, `zenoh-pico`'s task kept 1152 of its 4096 bytes of stack. The mobile
 base firmware must be checked again, since a stack overflow restarts the board.
 
