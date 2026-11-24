@@ -1,4 +1,4 @@
-# 12. The IMU and obstacle ring board, a second ROS node on Pico-ROS
+# 12. The deck board, IMU and obstacle ring, a second ROS node on Pico-ROS
 
 Date: 2026-11-23
 
@@ -8,10 +8,11 @@ micro-ROS over `rmw_zenoh_pico` applies to it too.
 
 ## Context
 
-The robot has a BNO085 IMU and a ring of 94 WS2812B LEDs around its plate, lit from
-the lidar's scan: red where something is within 20 cm, green elsewhere. Neither
-belongs on the mobile base board, whose firmware is about to be corrected and ported.
-Both are on a Raspberry Pi Pico of their own.
+The robot has a BNO085 IMU and a ring of 57 WS2812B LEDs around its plate, lit from
+the lidar's scan, from forest green to carmine as an obstacle nears. Neither belongs
+on the mobile base board, whose firmware is about to be corrected and ported. Both
+are on a Raspberry Pi Pico of their own, the deck board, on the level above the
+base, which the servos and pumps are to join.
 
 [ADR 0007](0007-zenoh-middleware-and-mcu-link.md) keeps ROS off the other boards, and
 ADR 0010 and ADR 0011 make the mobile base board the exception, with `AGENTS.md`
@@ -27,8 +28,8 @@ version of this firmware ran micro-ROS with an agent, which ADR 0007 excludes.
 ## Decision
 
 The board runs the mobile base's stack as it is now: Pico-ROS on zenoh-pico over
-Ethernet over USB, in its own directory of HARP3_uC, `imu_led_pico`, as the node
-`/imu_led_pico`. It is a prototype, corrected and ported to micro-ROS together with
+Ethernet over USB, in its own directory of HARP3_uC, `deck_pico`, as the node
+`/deck_pico`. It is a prototype, corrected and ported to micro-ROS together with
 the mobile base board, and not before.
 
 | Entity | Type | QoS |
@@ -40,9 +41,10 @@ The board's Ethernet over USB link is 192.168.8.0/24, not the mobile base's
 192.168.7.0/24: both boards plug into the same host.
 
 The ring shows, on each LED, the nearest valid measurement of the scan in the
-directions the LED faces, seen from the lidar at the centre of `base_link`: red under
-0.20 m, green otherwise, amber when a lidar has been silent for 0.5 s and blue while
-the board has no session. Green is never shown without recent data.
+directions the LED faces, seen from the lidar at the centre of `base_link`: carmine
+at 0.14 m, under which measurements are ignored, through gold to forest green from
+0.60 m. Dim white when a lidar has been silent for 0.5 s and blue, breathing, while
+the board has no session. The gradient is never shown without recent data.
 
 The micro-ROS agent stays excluded, for ADR 0007's reason.
 
@@ -59,13 +61,13 @@ The host needs, for the second subnet, what it has for the first: `chrony` allow
 interface named after a MAC address derived from its unique ID.
 
 The firmware compiles in the type hash of `Imu` and `LaserScan`: a ROS distribution
-upgrade means regenerating `imu_led_types.h` and reflashing, as for the mobile base.
+upgrade means regenerating `deck_pico_types.h` and reflashing, as for the mobile base.
 It exchanges no `harp3_msgs` type, so a change there does not touch it.
 
-The threshold is measured from the lidar, which sees the plate 6.5 to 14 cm away
-depending on the direction, and the robot's own structure. A mast or cable within
-20 cm of the lidar keeps its LEDs red until that sector is masked, and a threshold
-measured from the edge of the plate is a change to one function.
+The distances are measured from the lidar, which sees the plate 6.5 to 14 cm away
+depending on the direction. Ignoring everything within 14 cm hides the plate, and
+also an obstacle inside a notch nearer than that. Distances measured from the edge of
+the plate are a change to one function.
 
 The IMU is published in its own axes, in `imu_link`. The transform from `base_link`
 to `imu_link` belongs in `harp3_description` once the sensor's mounting is fixed,
